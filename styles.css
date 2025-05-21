@@ -28,7 +28,7 @@ canvas {
 #content h1,
 #content p,
 #content button {
-    color: white;
+    color: whitesmoke;
     background: linear-gradient(135deg, #ff6ec4, #7873f5, #42e695, #ffe29f, #ff6ec4);
     background-size: 1000% 1000%;
     animation: rainbow-gradient 30s ease-in-out infinite;
@@ -39,7 +39,9 @@ canvas {
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
     cursor: pointer;
     user-select: none;
+
 }
+
 
 
 @keyframes rainbow-gradient {
