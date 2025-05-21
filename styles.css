@@ -2,6 +2,7 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: "Outfit";
+  cursor: crosshair;
 }
 
 canvas {
@@ -36,7 +37,10 @@ canvas {
     border-radius: 8px;
     border: 4px solid black;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+    cursor: pointer;
+    user-select: none;
 }
+
 
 @keyframes rainbow-gradient {
         0% {
