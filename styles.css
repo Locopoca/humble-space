@@ -40,8 +40,8 @@ canvas#backgroundCanvas {
   padding: 16px;
   margin: 10px;
   border-radius: 8px;
-  border: 2px solid #666; /* Lighter border for minimalism */
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  border: 4px solid #333; /* Lighter border for minimalism */
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8); /* Subtle shadow */
   cursor: pointer;
   user-select: none;
   display: flex;
@@ -62,9 +62,9 @@ canvas#backgroundCanvas {
 }
 
 .grid-item:hover {
-  transform: scale(1.02); /* Reduced scale for minimalism */
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: scale(1.04); /* Reduced scale for minimalism */
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
 /* Staggered fadeIn animation */
