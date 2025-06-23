@@ -55,6 +55,59 @@ canvas#backgroundCanvas {
   transform: scale(0.95);
   background: #e0e0e0; /* Light gray background for all containers */
 }
+/* 
+.grid-item:not(.placeholder-card)::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 60% 40% 50% 70%;
+  background: linear-gradient(135deg, #ff4d94, #6a5acd, #32cd32, #ffd700, #ff4d94);
+  background-size: 1000% 1000%;
+  animation: rainbow-gradient 8s ease-in-out infinite, dotWobble 2s ease-in-out infinite;
+  opacity: 0.7;
+  z-index: 1;
+  /* Position the main dot anywhere within the container */
+  left: calc((sin(1.0 * var(--index)) + 1.0) * 50%);
+  top: calc((cos(1.0 * var(--index)) + 1.0) * 50%);
+  /* Distribute additional dots independently across the container */
+  box-shadow: 
+    calc((sin(2.0 * var(--index)) + 1.0) * 50%) calc((cos(2.0 * var(--index)) + 1.0) * 50%) 5px 5px rgba(0, 0, 0, 0.2),
+    calc((sin(3.0 * var(--index)) + 1.0) * 50%) calc((cos(3.0 * var(--index)) + 1.0) * 50%) 0 0 16px 16px #ff4d94,
+    calc((sin(4.0 * var(--index)) + 1.0) * 50%) calc((cos(4.0 * var(--index)) + 1.0) * 50%) 0 0 12px 12px #6a5acd,
+    calc((sin(5.0 * var(--index)) + 1.0) * 50%) calc((cos(5.0 * var(--index)) + 1.0) * 50%) 0 0 24px 24px #32cd32,
+    calc((sin(6.0 * var(--index)) + 1.0) * 50%) calc((cos(6.0 * var(--index)) + 1.0) * 50%) 0 0 14px 14px #ffd700,
+    calc((sin(7.0 * var(--index)) + 1.0) * 50%) calc((cos(7.0 * var(--index)) + 1.0) * 50%) 0 0 18px 18px #ff4d94;
+} */
+
+.grid-item > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes rainbow-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes dotWobble {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(5deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  75% {
+    transform: scale(1.15) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
 
 /* Remove the semi-transparent overlay for a cleaner look */
 .grid-item::before {
@@ -297,6 +350,23 @@ p {
 }
 
 
+@keyframes dotDrift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(5px, -5px);
+  }
+  50% {
+    transform: translate(-5px, 5px);
+  }
+  75% {
+    transform: translate(5px, 5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
 .intro-card p {
   font-size: 16px;
   font-weight: 300;

@@ -1,0 +1,509 @@
+body {
+  margin: 0;
+  overflow: auto;
+  font-family: "Outfit", sans-serif;
+  cursor: crosshair;
+}
+
+canvas#backgroundCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  padding-top: 16px;
+  padding-bottom: 64px;
+  box-sizing: border-box;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 150px);
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-item {
+  color: #333;
+  padding: 16px;
+  margin: 10px;
+  border-radius: 8px;
+  border: 2px solid #666;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  background: #e0e0e0;
+}
+
+/* Add random rainbow-colored dots to non-placeholder grid items */
+.grid-item:not(.placeholder-card)::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4d94, #6a5acd, #32cd32, #ffd700, #ff4d94);
+  background-size: 1000% 1000%;
+  animation: rainbow-gradient 8s ease-in-out infinite;
+  opacity: 0.7;
+  z-index: 1;
+  /* Randomize position using data-index as a seed */
+  left: calc(10% + (sin(1.0 * var(--index)) * 40%));
+  top: calc(10% + (cos(1.0 * var(--index)) * 40%));
+}
+
+/* Set custom property for random positioning */
+.grid-item[data-index="1"] { --index: 1; }
+.grid-item[data-index="2"] { --index: 2; }
+.grid-item[data-index="3"] { --index: 3; }
+.grid-item[data-index="4"] { --index: 4; }
+.grid-item[data-index="5"] { --index: 5; }
+.grid-item[data-index="6"] { --index: 6; }
+.grid-item[data-index="7"] { --index: 7; }
+.grid-item[data-index="8"] { --index: 8; }
+.grid-item[data-index="9"] { --index: 9; }
+
+/* Ensure content is above the dots */
+.grid-item > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hover effect for all grid items */
+.grid-item:hover {
+  transform: scale(1.02);
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Unique styles and animations for each grid item */
+.intro-card {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  background: #e8e8e8;
+  padding: 20px;
+  text-align: left;
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.intro-card h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.intro-card h1 span {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.intro-card p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.intro-card p span {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.manifesto-card {
+  grid-column: 3 / 5;
+  grid-row: 1 / 2;
+  background: #dcdcdc;
+  padding: 24px;
+  text-align: right;
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.manifesto-card h2 {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.manifesto-card h2 span {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.manifesto-card p {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.manifesto-card p span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.why-humble-card {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  background: #e0e0e0;
+  padding: 16px;
+  text-align: center;
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.why-humble-card h2 {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.why-humble-card h2 span {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.why-humble-card p {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.why-humble-card p span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.placeholder-card {
+  background: #d3d3d3;
+  color: #666;
+  border: 2px solid #999;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  cursor: default;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.placeholder-card p {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.placeholder-card p span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.placeholder-card:hover {
+  transform: none;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.placeholder-card:nth-child(4) {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.placeholder-card:nth-child(8) {
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+}
+
+.placeholder-card:nth-child(9) {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+}
+
+.community-card {
+  grid-column: 3 / 5;
+  grid-row: 2 / 4;
+  background: #e4e4e4;
+  padding: 20px;
+  text-align: center;
+  animation: slideInBottom 0.8s ease-out forwards;
+}
+
+.community-card h2 {
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.community-card h2 span {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.future-card {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+  background: #e0e0e0;
+  padding: 16px;
+  text-align: left;
+  animation: rotateIn 0.7s ease-out forwards;
+}
+
+.future-card h2 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.future-card h2 span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.future-card p {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.future-card p span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.support-card {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  background: #dcdcdc;
+  padding: 16px;
+  text-align: right;
+  animation: slideInTop 0.7s ease-out forwards;
+}
+
+.support-card h2 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.support-card h2 span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.support-card p {
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.support-card p span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Floating Footer Styling */
+.footer {
+  background: #e0e0e0;
+  border-top: 2px solid #666;
+  box-shadow: 0 -2px 0px rgba(0, 0, 0, 0.2);
+  color: #333;
+  padding: 16px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-links a {
+  text-decoration: none;
+}
+
+.button {
+  color: #333 !important;
+  background: #d3d3d3;
+  padding: 4px 8px;
+  margin: 5px;
+  border-radius: 6px;
+  border: 2px solid #666 !important;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  user-select: none;
+  font-size: 12px;
+}
+
+.button:hover {
+  transform: scale(1.02);
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rainbow-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+h1, h2 {
+  font-family: 'Outfit', sans-serif;
+  margin: 4px 0;
+  color: #333;
+  line-height: 1.2;
+}
+
+p {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #333;
+}
+
+.community-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .intro-card, .manifesto-card, .community-card {
+    grid-column: 1 / 3;
+    grid-row: auto;
+  }
+
+  .why-humble-card, .future-card, .support-card, .placeholder-card {
+    grid-column: 1 / 2;
+    grid-row: auto;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h1 span {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h2 span {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  p span {
+    font-size: 14px;
+  }
+
+  .grid-item::after {
+    width: 8px;
+    height: 8px;
+  }
+}
